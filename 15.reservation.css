@@ -1,0 +1,224 @@
+/* 通用样式重置 */
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #f4e8d5; /* 应用于整个页面的背景颜色 */
+}
+
+/* 导航栏样式 */
+.index {
+    background-color: #5f473a;
+    height: 45px;
+    width: 100%;
+    position: fixed;
+    z-index: 1000;
+}
+
+.index a.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bolder;
+    position: absolute;
+    left: 80px;
+    top: 0;
+    line-height: 45px;
+    text-decoration: none;
+}
+
+.index a.logo:hover {
+    color: #f4e8d5;
+    text-decoration: none;
+}
+
+.index ul {
+    position: absolute;
+    right: 5vw;
+    top: 0;
+    line-height: 45px;
+}
+
+.index li {
+    display: inline;
+    margin-right: 4vw;
+}
+
+.index ul a {
+    color: white;
+    text-decoration: none;
+}
+
+.index ul a:hover {
+    text-decoration: underline;
+}
+
+
+.title {
+    height: 50vh;
+    background-image: url("images/訂位.jfif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+.title h1 {
+    color: white;
+    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    position: absolute;
+    right: 60px;
+    top: 75px;
+    line-height: 80px;
+    font-size: 60px;
+}
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.reservation {
+    margin-bottom: 40px; 
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: auto;
+    background-color: #ee9c18f8;
+    border-radius: 10px;
+    box-shadow: 10px 10px 20px rgba(33, 44, 55, .3);
+    padding: 20px;
+    margin-top: 20px;
+}
+
+
+
+.reservation {
+    transition: background-color 4s ease; 
+}
+
+
+.reservation.mouse-out {
+    background-color: #186eeef8; 
+}
+
+.reservation h1 {
+    color: #eee;
+    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    font-size: 30px;
+    font-weight: bold;
+    text-align: left; 
+    margin-bottom: 20px;
+}
+
+.reservation form {
+    width: 300px; 
+    padding: 10px; 
+    height: 800px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="datetime-local"],
+input[type="number"],
+textarea {
+    width: 100%;
+    height: 30px; 
+    background-color: transparent;
+    border: none;
+    border-bottom: 2px solid #eee;
+    font-size: 16px; 
+    font-weight: bold;
+    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    margin-bottom: 10px; 
+    padding: 5px; 
+    box-sizing: border-box;
+    outline: none;
+    transition: border-bottom 0.3s ease; 
+    color: white; 
+    text-align: left; 
+}
+
+
+textarea {
+    height: 50px; 
+}
+
+
+input::placeholder,
+textarea::placeholder {
+    font-size: 16px; 
+    color: #aaa; 
+}
+
+
+input:hover,
+textarea:hover {
+    border-bottom: 2px solid #ccc; 
+}
+
+
+button {
+    width: 100px;
+    height: 30px; 
+    border: 2px solid #eee; 
+    background-color: transparent;
+    border-radius: 20px; 
+    color: white; 
+    font-size: 16px; 
+    font-weight: bold;
+    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    cursor: pointer;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s; 
+    margin-right: 10px; 
+}
+
+button:hover {
+    background-color: #eee; 
+    color: #5f473a; 
+}
+
+
+label {
+    font-size: 16px; 
+    font-weight: bold;
+    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    margin-bottom: 10px; 
+    text-align: left; 
+    color: white; 
+}
+
+
+.buttons {
+    display: flex; 
+    justify-content: flex-start; 
+    margin-top: 20px; 
+}
+
+
+footer {
+    background-color: #000000;
+    color: #B7B7B7;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+}
