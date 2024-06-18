@@ -2,10 +2,12 @@
 * {
     padding: 0;
     margin: 0;
+    box-sizing: border-box; /* 添加盒子模型属性，确保元素的宽度和高度包括边框和填充 */
 }
 
 body {
     background-color: #f4e8d5; /* 应用于整个页面的背景颜色 */
+    font-family: Arial, sans-serif; /* 设置全局字体 */
 }
 
 /* 导航栏样式 */
@@ -20,7 +22,7 @@ body {
 .index a.logo {
     color: white;
     font-size: 20px;
-    font-weight: bolder;
+    font-weight: bold;
     position: absolute;
     left: 80px;
     top: 0;
@@ -54,7 +56,7 @@ body {
     text-decoration: underline;
 }
 
-
+/* 标题区域 */
 .title {
     height: 50vh;
     background-image: url("images/訂位.jfif");
@@ -63,20 +65,17 @@ body {
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: center; 
+    align-items: center;
 }
 
 .title h1 {
-    color: white;
-    text-shadow: #5f473a 0.1em 0.1em 0.2em;
-    position: absolute;
-    right: 60px;
-    top: 75px;
-    line-height: 80px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #5f473a; /* 主标题文字阴影 */
     font-size: 60px;
+    margin: 0;
 }
 
-
+/* 主内容区域 */
 main {
     display: flex;
     flex-direction: column;
@@ -85,52 +84,38 @@ main {
 }
 
 .reservation {
-    margin-bottom: 40px; 
+    width: 400px; /* 设置表单容器的宽度 */
+    margin-bottom: 40px;
     overflow: hidden;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 300px;
-    height: auto;
-    background-color: #ee9c18f8;
+    background-color: #39d7f7f8; /* 浅蓝色背景 */
     border-radius: 10px;
-    box-shadow: 10px 10px 20px rgba(33, 44, 55, .3);
+    box-shadow: 10px 10px 20px rgba(33, 44, 55, 0.3);
     padding: 20px;
     margin-top: 20px;
 }
 
-
-
-.reservation {
-    transition: background-color 4s ease; 
-}
-
-
-.reservation.mouse-out {
-    background-color: #186eeef8; 
+.reservation:hover {
+    background-color: #22f2c1f8; /* 浅绿色背景 */
+    transition: background-color 0.5s ease;
 }
 
 .reservation h1 {
-    color: #eee;
-    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px #5f473a; /* 标题文字阴影 */
     font-size: 30px;
     font-weight: bold;
-    text-align: left; 
     margin-bottom: 20px;
+    text-align: center;
 }
 
 .reservation form {
-    width: 300px; 
-    padding: 10px; 
-    height: 800px; 
+    width: 100%; /* 让表单填充其父容器 */
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
 }
-
 
 input[type="text"],
 input[type="tel"],
@@ -139,86 +124,87 @@ input[type="datetime-local"],
 input[type="number"],
 textarea {
     width: 100%;
-    height: 30px; 
+    height: 30px;
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #eee;
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: bold;
-    text-shadow: #5f473a 0.1em 0.1em 0.2em;
-    margin-bottom: 10px; 
-    padding: 5px; 
+    text-shadow: 1px 1px 2px #5f473a; /* 输入框文字阴影 */
+    margin-bottom: 10px;
+    padding: 5px;
     box-sizing: border-box;
     outline: none;
-    transition: border-bottom 0.3s ease; 
-    color: white; 
-    text-align: left; 
+    transition: border-bottom 0.3s ease;
+    color: white;
+    text-align: left;
 }
-
 
 textarea {
-    height: 50px; 
+    height: 50px;
 }
-
 
 input::placeholder,
 textarea::placeholder {
-    font-size: 16px; 
-    color: #aaa; 
+    font-size: 16px;
+    color: #aaa;
 }
-
 
 input:hover,
 textarea:hover {
-    border-bottom: 2px solid #ccc; 
+    border-bottom: 2px solid #ccc;
 }
-
 
 button {
     width: 100px;
-    height: 30px; 
-    border: 2px solid #eee; 
+    height: 30px;
+    border: 2px solid #eee;
     background-color: transparent;
-    border-radius: 20px; 
-    color: white; 
-    font-size: 16px; 
+    border-radius: 20px;
+    color: rgb(0, 0, 0);
+    font-size: 16px;
     font-weight: bold;
-    text-shadow: #5f473a 0.1em 0.1em 0.2em;
+    text-shadow: 1px 1px 2px #5f473a; /* 按钮文字阴影 */
     cursor: pointer;
     outline: none;
-    transition: background-color 0.3s, color 0.3s; 
-    margin-right: 10px; 
+    transition: background-color 0.3s, color 0.3s;
+    margin-right: 10px;
 }
 
 button:hover {
-    background-color: #eee; 
-    color: #5f473a; 
+    background-color: #eee;
+    color: #5f473a;
 }
-
 
 label {
-    font-size: 16px; 
+    font-size: 16px;
     font-weight: bold;
-    text-shadow: #5f473a 0.1em 0.1em 0.2em;
-    margin-bottom: 10px; 
-    text-align: left; 
-    color: white; 
+    text-shadow: 1px 1px 2px #5f473a; /* 标签文字阴影 */
+    margin-bottom: 10px;
+    text-align: left;
+    color: white;
 }
-
 
 .buttons {
-    display: flex; 
-    justify-content: flex-start; 
-    margin-top: 20px; 
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
 }
-
 
 footer {
     background-color: #000000;
-    color: #B7B7B7;
+    color: #b7b7b7;
     height: 40px;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 14px;
+}
+
+.error {
+    color: red;
+    font-size: 1em;
+    margin-top: 5px;
+    font-weight: bold; /* 将文字设置为粗体 */
+    text-shadow: 1px 1px 2px #5f473a; /* 错误信息文字阴影 */
 }
