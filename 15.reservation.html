@@ -32,27 +32,35 @@
     <main>
         <div class="reservation">
             <h1>餐廳訂位系統</h1>
-            <form action="/submit_reservation" method="POST">
+            <form id="reservationForm">
                 <label for="customer_id">顧客ID:</label>
                 <input type="text" id="customer_id" name="customer_id" required>
+                <span id="customer_id_error" class="error"></span>
                 
                 <label for="customer_name">顧客姓名:</label>
                 <input type="text" id="customer_name" name="customer_name" required>
+                <span id="customer_name_error" class="error"></span>
                 
                 <label for="customer_phone">聯絡電話:</label>
                 <input type="text" id="customer_phone" name="customer_phone" required>
+                <span id="customer_phone_error" class="error"></span>
                 
                 <label for="customer_email">電子郵件:</label>
                 <input type="email" id="customer_email" name="customer_email" required>
+                <span id="customer_email_error" class="error"></span>
                 
                 <label for="reservation_date">訂位日期和時間:</label>
                 <input type="datetime-local" id="reservation_date" name="reservation_date" required>
+                <span id="reservation_date_error" class="error"></span>
                 
-                <label for="people_count">訂位人數:</label>
+                <label for="people_count">訂位人數(1-10人):</label>
                 <input type="number" id="people_count" name="people_count" required>
+                <span id="people_count_error" class="error"></span>
                 
-                <label for="special_requests">特殊要求或備註:</label>
+                <label for="special_requests">特殊要求或備註(50字以內):</label>
                 <textarea id="special_requests" name="special_requests"></textarea>
+                <span id="special_requests_error" class="error"></span>
+                
                 
                 <div class="buttons">
                     <button type="submit">確認訂位</button>
@@ -65,5 +73,115 @@
     <footer>
         <p>Copyright © 2024 Mövenpick Café. All Rights Reserved. Created By 黃柏郡</p>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const reservationForm = document.getElementById('reservationForm');
+        
+            reservationForm.addEventListener('submit', function(event) {
+                event.preventDefault();
+        
+                const customerID = document.getElementById('customer_id').value.trim();
+                const customerName = document.getElementById('customer_name').value.trim();
+                const customerPhone = document.getElementById('customer_phone').value.trim();
+                const customerEmail = document.getElementById('customer_email').value.trim();
+                const reservationDateTimeStr = document.getElementById('reservation_date').value.trim();
+                const peopleCount = document.getElementById('people_count').value.trim();
+                const specialRequests = document.getElementById('special_requests').value.trim();
+        
+                // 錯誤消息的容器
+                const errors = {};
+        
+                // 檢查顧客ID是否為數字且非空
+                if (!customerID || isNaN(customerID)) {
+                    errors.customer_id = '請重新輸入!!!必須為數字且不能為空';
+                }
+        
+                // 檢查顧客姓名
+                if (!customerName || customerName.length < 2 || customerName.length > 30 || !/^[a-zA-Z\u4e00-\u9fa5\s]+$/.test(customerName)) {
+                    errors.customer_name = '請重新輸入!!!顧客姓名必須介於2至30個字，且只能包含中文、英文';
+                }
+        
+                // 檢查聯絡電話
+                if (!customerPhone || !/^[\d+\-\s]+$/.test(customerPhone)) {
+                    errors.customer_phone = '請重新輸入!!!聯絡電話格式不正確';
+                }
+        
+                // 檢查電子郵件
+                if (!customerEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(customerEmail)) {
+                    errors.customer_email = '請重新輸入!!!電子郵件格式不正確';
+                }
+        
+                // 驗證訂位日期和時間
+                const now = new Date();
+                const reservationDateTime = new Date(reservationDateTimeStr);
+    
+        
+                // 檢查是否為未來時間且在營業時間內
+                if (reservationDateTime <= now) {
+                    errors.reservation_date = '請重新輸入!!!訂位日期和時間必須為未來時間';
+                } 
+                 
+
+                // 檢查訂位人數
+                if (isNaN(peopleCount) || peopleCount < 1 || peopleCount > 10) {
+                errors.people_count = '請重新輸入!!!訂位人數必須介於1到10之間';
+                }
+
+                // 檢查特殊要求或備註長度
+                if (specialRequests.length > 50)
+                {errors.special_requests = '字數長度不能超過50字';}
+
+                // 顯示錯誤訊息
+                Object.keys(errors).forEach(field => {
+                    const errorElement = document.getElementById(`${field}_error`);
+                    if (errorElement) {
+                        errorElement.textContent = errors[field];
+                    }
+                });
+        
+                // 如果有錯誤，不執行後續的表單提交
+                if (Object.keys(errors).length > 0) {
+                    return;
+                }
+        
+                // 如果通過了所有驗證檢查，可以提交表單
+                const data = {
+                    customer_id: customerID,
+                    customer_name: customerName,
+                    customer_phone: customerPhone,
+                    customer_email: customerEmail,
+                    reservation_date: reservationDateTimeStr,
+                    people_count: peopleCount,
+                    special_requests: specialRequests
+                };
+        
+                fetch('/submit_reservation', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    } else {
+                        response.json().then(data => {
+                            alert(data.message);
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Reservation failed!');
+                });
+            });
+        });
+        
+    </script>
+    
+    
 </body>
 </html>
+
